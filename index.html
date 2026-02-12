@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Srushtee 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e8d5f2 50%, #d4e8ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts animation */
+        .heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 6s ease-in infinite;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Page sections */
+        .page {
+            display: none;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Home page */
+        .home-page {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .home-page h1 {
+            font-size: 3.5em;
+            color: #d4638f;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .home-page .subtitle {
+            font-size: 1.8em;
+            color: #9b6b9e;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .choice-buttons {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .choice-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px 30px;
+            width: 280px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 99, 143, 0.2);
+            border: 3px solid transparent;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(212, 99, 143, 0.4);
+            border-color: #d4638f;
+        }
+
+        .choice-card h2 {
+            color: #d4638f;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .choice-card p {
+            color: #7a5c7f;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .choice-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        /* Proposal page */
+        .proposal-page {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .proposal-page h1 {
+            font-size: 2.5em;
+            color: #d4638f;
+            margin-bottom: 30px;
+        }
+
+        .love-message {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 700px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            line-height: 1.8;
+            font-size: 1.2em;
+            color: #5a4a5f;
+        }
+
+        .love-message .highlight {
+            color: #d4638f;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .question {
+            font-size: 2em;
+            color: #9b6b9e;
+            margin: 40px 0 30px;
+            font-weight: bold;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .yes-btn, .no-btn {
+            padding: 20px 60px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #d4638f 0%, #9b6b9e 100%);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(212, 99, 143, 0.5);
+        }
+
+        .no-btn {
+            background: #e8d5f2;
+            color: #7a5c7f;
+            position: relative;
+        }
+
+        /* Heart unlock page */
+        .heart-unlock-page {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .heart-lock {
+            width: 200px;
+            height: 200px;
+            margin: 50px auto;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .heart-shape {
+            width: 200px;
+            height: 180px;
+            position: relative;
+        }
+
+        .heart-shape:before,
+        .heart-shape:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 160px;
+            border-radius: 100px 100px 0 0;
+            background: #d4638f;
+        }
+
+        .heart-shape:before {
+            left: 100px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-shape:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .lock-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: white;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .heart-lock:hover .lock-icon {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .heart-lock.unlocking .heart-shape:before,
+        .heart-lock.unlocking .heart-shape:after {
+            animation: heartBeat 0.5s ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .unlock-instruction {
+            font-size: 1.5em;
+            color: #9b6b9e;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* Memory gallery page */
+        .memory-gallery {
+            padding: 40px 20px;
+        }
+
+        .memory-gallery h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #d4638f;
+            margin-bottom: 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .photo-caption {
+            padding: 20px;
+            text-align: center;
+            color: #7a5c7f;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        .final-message {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            font-size: 1.3em;
+            color: #5a4a5f;
+            line-height: 1.8;
+        }
+
+        /* Success page */
+        .success-page {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .success-page h1 {
+            font-size: 3em;
+            color: #d4638f;
+            margin-bottom: 30px;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-message {
+            font-size: 1.5em;
+            color: #9b6b9e;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #d4638f;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Back button */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #d4638f;
+            color: #d4638f;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            background: #d4638f;
+            color: white;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .home-page h1 {
+                font-size: 2.5em;
+            }
+
+            .home-page .subtitle {
+                font-size: 1.3em;
+            }
+
+            .choice-buttons {
+                gap: 20px;
+            }
+
+            .choice-card {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .love-message {
+                padding: 30px 20px;
+                font-size: 1.1em;
+            }
+
+            .question {
+                font-size: 1.5em;
+            }
+
+            .yes-btn, .no-btn {
+                padding: 15px 40px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="heart-container" id="heartContainer"></div>
+
+    <!-- Back button -->
+    <button class="back-btn" id="backBtn" style="display: none;" onclick="goHome()">← Back</button>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div class="page active" id="homePage">
+            <div class="home-page">
+                <h1>Hey Srush! 💕</h1>
+                <p class="subtitle">I have something special for you...</p>
+                
+                <div class="choice-buttons">
+                    <div class="choice-card" onclick="showProposal()">
+                        <div class="choice-icon">💌</div>
+                        <h2>The Proposal</h2>
+                        <p>A question I've been waiting to ask...</p>
+                    </div>
+                    
+                    <div class="choice-card" onclick="showHeartUnlock()">
+                        <div class="choice-icon">💖</div>
+                        <h2>Unlock My Heart</h2>
+                        <p>Discover what's inside...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proposal Page -->
+        <div class="page" id="proposalPage">
+            <div class="proposal-page">
+                <h1>Dear Srushtee,</h1>
+                
+                <div class="love-message">
+                    <p>From the moment you walked into my life, everything changed. You're not just beautiful – you're <span class="highlight">my beauty with brains</span>, the perfect combination of grace and intelligence that takes my breath away every single day.</p>
+                    
+                    <p style="margin-top: 20px;">Your smile lights up my darkest days, your laugh is my favorite melody, and your presence makes every moment feel like magic. You challenge me, inspire me, and make me want to be a better person.</p>
+                    
+                    <p style="margin-top: 20px;">I've fallen deeply, completely, and irrevocably in love with you.</p>
+                    
+                    <p style="margin-top: 20px;">So this Valentine's Day, I have one question that means everything to me...</p>
+                </div>
+                
+                <div class="question">
+                    Will you be my Valentine? 💕
+                </div>
+                
+                <div class="button-container">
+                    <button class="yes-btn" onclick="showSuccess()">Yes! 💖</button>
+                    <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Heart Unlock Page -->
+        <div class="page" id="heartUnlockPage">
+            <div class="heart-unlock-page">
+                <h1>Unlock My Heart 💕</h1>
+                <p class="unlock-instruction">Click the heart to reveal what's inside...</p>
+                
+                <div class="heart-lock" id="heartLock" onclick="unlockHeart()">
+                    <div class="heart-shape"></div>
+                    <div class="lock-icon">🔒</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memory Gallery Page -->
+        <div class="page" id="memoryPage">
+            <div class="memory-gallery">
+                <h1>Our Beautiful Journey 💕</h1>
+                
+                <div class="gallery-grid">
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&h=600&fit=crop" alt="Memory 1">
+                        <div class="photo-caption">Every moment with you is a treasure</div>
+                    </div>
+                    
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&h=600&fit=crop" alt="Memory 2">
+                        <div class="photo-caption">Your smile brightens my world</div>
+                    </div>
+                    
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=800&h=600&fit=crop" alt="Memory 3">
+                        <div class="photo-caption">Together, we create magic</div>
+                    </div>
+                </div>
+                
+                <div class="final-message">
+                    <p><strong>Srushtee</strong>, you are my <span class="highlight">beauty with brains</span>, my best friend, and my everything.</p>
+                    <p style="margin-top: 20px;">Will you make this Valentine's Day unforgettable and be mine? 💕</p>
+                    <button class="yes-btn" style="margin-top: 30px;" onclick="showSuccess()">Yes, Always! 💖</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Page -->
+        <div class="page" id="successPage">
+            <div class="success-page">
+                <h1>🎉 You Said Yes! 🎉</h1>
+                <div class="success-message">
+                    <p>Srushtee, you've just made me the happiest person alive!</p>
+                    <p style="margin-top: 20px;">I promise to cherish you, make you smile every day, and love you with all my heart.</p>
+                    <p style="margin-top: 20px;">This is just the beginning of our beautiful story together. ❤️</p>
+                    <p style="margin-top: 30px; font-size: 1.2em;"><strong>Happy Valentine's Day, my beauty with brains! 💕</strong></p>
+                    <p style="margin-top: 10px;">~ Paritosh</p>
+                    <button class="yes-btn" style="margin-top: 40px; background: linear-gradient(135deg, #9b6b9e 0%, #d4638f 100%);" onclick="goHome()">💕 Back to Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('heartContainer');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 6000);
+            }, 800);
+        }
+
+        // Navigate between pages
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Show/hide back button
+            const backBtn = document.getElementById('backBtn');
+            if (pageId === 'homePage' || pageId === 'successPage') {
+                backBtn.style.display = 'none';
+            } else {
+                backBtn.style.display = 'block';
+            }
+        }
+
+        function goHome() {
+            showPage('homePage');
+        }
+
+        function showProposal() {
+            showPage('proposalPage');
+        }
+
+        function showHeartUnlock() {
+            showPage('heartUnlockPage');
+        }
+
+        // Move "No" button away
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const maxX = window.innerWidth - noBtn.offsetWidth - 100;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        // Unlock heart animation
+        function unlockHeart() {
+            const heartLock = document.getElementById('heartLock');
+            heartLock.classList.add('unlocking');
+            
+            setTimeout(() => {
+                showPage('memoryPage');
+            }, 500);
+        }
+
+        // Show success page with confetti
+        function showSuccess() {
+            showPage('successPage');
+            createConfetti();
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const confettiContainer = document.createElement('div');
+            confettiContainer.className = 'confetti';
+            document.body.appendChild(confettiContainer);
+            
+            const colors = ['#d4638f', '#9b6b9e', '#ffc0e5', '#e8d5f2', '#ffb6d9'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti-piece';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confettiContainer.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 30);
+            }
+            
+            setTimeout(() => {
+                confettiContainer.remove();
+            }, 5000);
+        }
+
+        // Initialize
+        createFloatingHearts();
+    </script>
+</body>
+</html>
